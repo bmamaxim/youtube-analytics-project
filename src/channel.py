@@ -56,37 +56,37 @@ class Channel:
         """
         Метод суммирует подписчиков ютуб каналов
         """
-        return self.subscriber + other.subscriber
+        return int(self.subscriber) + int(other.subscriber)
 
     def __sub__(self, other):
         """
         Метод врзвращает разницу подписчиков ютуб каналов
         """
-        return self.subscriber - other.subscriber
+        return int(self.subscriber) - int(other.subscriber)
 
     def __lt__(self, other):
         """
         Метод сравнения: возвращает True если 'меньше' подписчиков ютуб каналов
         """
-        return self.subscriber < other.subscriber
+        return int(self.subscriber) < int(other.subscriber)
 
     def __le__(self, other):
         """
         Метод сравнения: возвращает True если 'меньше или равно' подписчиков ютуб каналов
         """
-        return self.subscriber <= other.subscriber
+        return int(self.subscriber) <= int(other.subscriber)
 
     def __gt__(self, other):
         """
         Метод сравнения: возвращает True если 'больше' по подписчикам ютуб каналов
         """
-        return self.subscriber > other.subscriber
+        return int(self.subscriber) > int(other.subscriber)
 
     def __ge__(self, other):
         """
         Метод сравнения: возвращает True если 'больше или равно' по подписчикам ютуб каналов
         """
-        return self.subscriber >= other.subscriber
+        return int(self.subscriber) >= int(other.subscriber)
 
     def __str__(self):
         return f"{self.title} {self.url}"
