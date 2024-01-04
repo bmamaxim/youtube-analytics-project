@@ -6,12 +6,13 @@ from googleapiclient.discovery import build
 class Video:
     api_key: str = os.getenv('API_KEY')
 
-    def __init__(self, video_id: str, ):
+    def __init__(self, video_id: str):
         self.video_id = video_id
         self.video_title = self.video_response()['items'][0]['snippet']['title']
-        self.url = 'https://youtu.be/' + self.video_id
+        self.url = f"https://youtu.be/{self.video_id}"
         self.view_count = self.video_response()['items'][0]['statistics']['viewCount']
         self.comment_count = self.video_response()['items'][0]['statistics']['commentCount']
+        self.duration = self.video_response()['items'][0]['contentDetails']['duration']
 
     @classmethod
     def get_service(cls):
