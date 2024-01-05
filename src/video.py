@@ -9,10 +9,10 @@ class Video:
     def __init__(self, video_id: str):
         self.video_id = video_id
         self.video_title: str = self.video_response()['items'][0]['snippet']['title']
-        self.url = f"https://youtu.be/{self.video_id}"
+        self.url = f'https://youtu.be/{self.video_id}'
         self.view_count: int = self.video_response()['items'][0]['statistics']['viewCount']
         self.comment_count: int = self.video_response()['items'][0]['statistics']['commentCount']
-        self.duration = self.video_response()['items'][0]['contentDetails']['duration']
+        self.duration: str = self.video_response()['items'][0]['contentDetails']['duration']
         self.like_count: int = self.video_response()['items'][0]['statistics']['likeCount']
 
     @classmethod

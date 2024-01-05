@@ -49,6 +49,3 @@ class PlayList:
         """
         best_video: Video = max(self.videos, key=lambda i: i.like_count)
         return best_video.url
-
-    def __repr__(self):
-        return f"{self.url}"
