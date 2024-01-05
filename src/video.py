@@ -8,12 +8,24 @@ class Video:
 
     def __init__(self, video_id: str):
         self.video_id = video_id
-        self.video_title: str = self.video_response()['items'][0]['snippet']['title']
-        self.url = f"https://youtu.be/{self.video_id}"
-        self.view_count: int = self.video_response()['items'][0]['statistics']['viewCount']
-        self.comment_count: int = self.video_response()['items'][0]['statistics']['commentCount']
-        self.duration = self.video_response()['items'][0]['contentDetails']['duration']
-        self.like_count: int = self.video_response()['items'][0]['statistics']['likeCount']
+        try:
+            self.video_response = self.get_service().videos().list(
+                part='snippet,statistics,contentDetails,topicDetails',
+                id=self.video_id
+                ).execute()
+            self.title: str = self.video_response()['items'][0]['snippet']['title']
+            self.url: str = f'https://youtu.be/{self.video_id}'
+            self.view_count: int = self.video_response['items'][0]['statistics']['viewCount']
+            self.comment_count: int = self.video_response['items'][0]['statistics']['commentCount']
+            self.duration: str = self.video_response['items'][0]['contentDetails']['duration']
+            self.like_count: int = self.video_response['items'][0]['statistics']['likeCount']
+        except Exception:
+            self.title: str = None
+            self.url: str = None
+            self.view_count: int = None
+            self.comment_count: int = None
+            self.duration: str = None
+            self.like_count: int = None
 
     @classmethod
     def get_service(cls):
@@ -23,16 +35,8 @@ class Video:
         """
         return build('youtube', 'v3', developerKey=cls.api_key)
 
-    def video_response(self):
-        """
-        Метод получит статистику видео по его id
-        """
-        return self.get_service().videos().list(part='snippet,statistics,contentDetails,topicDetails',
-                                                id=self.video_id
-                                                ).execute()
-
     def __str__(self) -> str:
-        return self.video_title
+        return self.title
 
 
 class PLVideo(Video):
